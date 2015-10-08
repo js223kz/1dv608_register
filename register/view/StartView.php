@@ -22,6 +22,7 @@ class StartView
     private static $cookiePassword = 'LoginView::CookiePassword';
     private static $keep = 'LoginView::KeepMeLoggedIn';
     private static $messageId = 'LoginView::Message';
+    private static $register = 'LoginView::Register';
     private $message = "";
     private $userName = "";
     private $pwd = "";
@@ -29,6 +30,13 @@ class StartView
 
     public function __construct(){
         $this->userDAL = new \model\UserDAL();
+    }
+
+    public function UserWantsToRegister(){
+        if (isset($_GET['register'])){
+            return true;
+        }
+        return false;
     }
 
     public function renderLogoutHTML(){
@@ -45,7 +53,7 @@ class StartView
     public function renderLoginHTML(){
         return '
 			<h2>Not logged in</h2>
-			<a href="">Register a new user</a>
+			<a href="?register" name="' . self::$register . '">Register a new user</a>
 			<form method="POST">
 				<fieldset>
 					<legend>Login - enter Username and password</legend>

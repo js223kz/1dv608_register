@@ -45,10 +45,25 @@
       <file leaf-file-name="StartController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller/StartController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39923954">
-              <caret line="33" column="86" selection-start-line="33" selection-start-column="86" selection-end-line="33" selection-end-column="86" />
+            <state vertical-scroll-proportion="0.6131179">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="e#222#242#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterView.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/RegisterView.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-23.125">
+              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+              <folding>
+                <marker date="1444313797000" expanded="true" signature="402:477" placeholder="..." />
+                <marker date="1444313797000" expanded="true" signature="533:1630" placeholder="..." />
+                <marker date="1444313797000" expanded="true" signature="564:682" placeholder="..." />
+                <marker date="1444313797000" expanded="true" signature="564:1606" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -77,12 +92,12 @@
       <file leaf-file-name="StartView.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/StartView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.458334">
-              <caret line="101" column="9" selection-start-line="99" selection-start-column="8" selection-end-line="101" selection-end-column="9" />
+            <state vertical-scroll-proportion="-8.125">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
-                <marker date="1444311787000" expanded="true" signature="889:1041" placeholder="..." />
-                <marker date="1444311787000" expanded="true" signature="1197:1913" placeholder="..." />
-                <marker date="1444311787000" expanded="true" signature="1212:1902" placeholder="..." />
+                <marker date="1444318795000" expanded="true" signature="1089:1241" placeholder="..." />
+                <marker date="1444318795000" expanded="true" signature="1437:2153" placeholder="..." />
+                <marker date="1444318795000" expanded="true" signature="1452:2142" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -114,12 +129,12 @@
         <option value="$PROJECT_DIR$/controller/RegisterController.php" />
         <option value="$PROJECT_DIR$/controller/LoginController.php" />
         <option value="$PROJECT_DIR$/view/LayoutView.php" />
-        <option value="$PROJECT_DIR$/view/RegisterView.php" />
         <option value="$PROJECT_DIR$/common/EmptyPasswordException.php" />
         <option value="$PROJECT_DIR$/model/User.php" />
         <option value="$PROJECT_DIR$/view/LoginView.php" />
         <option value="$PROJECT_DIR$/model/UserDAL.php" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/view/RegisterView.php" />
         <option value="$PROJECT_DIR$/view/StartView.php" />
         <option value="$PROJECT_DIR$/controller/StartController.php" />
       </list>
@@ -137,8 +152,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1866" />
-    <option name="y" value="-420" />
+    <option name="x" value="-1864" />
+    <option name="y" value="-419" />
     <option name="width" value="1814" />
     <option name="height" value="1173" />
   </component>
@@ -299,7 +314,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1866" y="-420" width="1814" height="1173" extended-state="0" />
+    <frame x="-1864" y="-419" width="1814" height="1173" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -443,14 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/LoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625">
-          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/EmptyPasswordException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.625">
@@ -495,22 +502,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controller/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/RegisterView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.125">
+          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+          <folding>
+            <marker date="1444313797000" expanded="true" signature="402:477" placeholder="..." />
+            <marker date="1444313797000" expanded="true" signature="533:1630" placeholder="..." />
+            <marker date="1444313797000" expanded="true" signature="564:682" placeholder="..." />
+            <marker date="1444313797000" expanded="true" signature="564:1606" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/StartView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.458334">
-          <caret line="101" column="9" selection-start-line="99" selection-start-column="8" selection-end-line="101" selection-end-column="9" />
+        <state vertical-scroll-proportion="-8.125">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <marker date="1444311787000" expanded="true" signature="889:1041" placeholder="..." />
-            <marker date="1444311787000" expanded="true" signature="1197:1913" placeholder="..." />
-            <marker date="1444311787000" expanded="true" signature="1212:1902" placeholder="..." />
+            <marker date="1444318795000" expanded="true" signature="1089:1241" placeholder="..." />
+            <marker date="1444318795000" expanded="true" signature="1437:2153" placeholder="..." />
+            <marker date="1444318795000" expanded="true" signature="1452:2142" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/StartController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39923954">
-          <caret line="33" column="86" selection-start-line="33" selection-start-column="86" selection-end-line="33" selection-end-column="86" />
+        <state vertical-scroll-proportion="0.6131179">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="e#222#242#0#PHP" expanded="true" />
           </folding>

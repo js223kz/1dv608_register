@@ -31,23 +31,23 @@ class StartController
     }
 
     public function executeUserChoice(){
-        if($this->startView->userWantsToLogin() && !$this->userDAL->isUserLoggedIn()){
-            if($this->startView->getUserCredentials() != null){
-                try{
+
+        if($this->startView->userWantsToLogin() && !$this->userDAL->isUserLoggedIn()) {
+            if ($this->startView->getUserCredentials() != null) {
+                try {
                     $this->userDAL->authenticateUser($this->startView->getUserCredentials());
                     $this->startView->showResponseMessage();
-                }
-                catch(\common\EmptyUserNameException $e){
+                } catch (\common\EmptyUserNameException $e) {
                     $this->startView->setMessage("Username missing!");
-                }
-                catch(\common\EmptyPasswordException $e){
+                } catch (\common\EmptyPasswordException $e) {
                     $this->startView->setMessage("Password missing");
                 }
             }
-
-
-        }else{
         }
+        if($this->startView->UserWantsToRegister()){
+
+        }
+
         if($this->startView->userWantsToLogout() && $this->userDAL->isUserLoggedIn()){
             $this->userDAL->unsetUserLoggedInSession();
             $this->startView->showResponseMessage();

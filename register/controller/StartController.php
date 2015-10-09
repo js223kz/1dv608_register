@@ -13,8 +13,6 @@ require_once('view/DateTimeView.php');
 require_once('view/RegisterView.php');
 require_once('controller/RegisterController.php');
 
-use view\LayoutView;
-use view\StartView;
 
 class StartController
 {
@@ -22,10 +20,10 @@ class StartController
     private $layoutView;
     private $dateTimeView;
     private $registerView;
-    private $userDAL;
+    private $loginDAL;
 
-    public function __construct(\model\UserDAL $userDAL){
-        $this->userDAL = $userDAL;
+    public function __construct(\model\loginDAL $userDAL){
+        $this->loginDAL = $userDAL;
         $this->startView = new \view\StartView();
         $this->layoutView = new \view\LayoutView();
         $this->dateTimeView = new \view\DateTimeView();
@@ -35,10 +33,10 @@ class StartController
 
     public function executeUserChoice(){
 
-        if($this->startView->userWantsToLogin() && !$this->userDAL->isUserLoggedIn()) {
+        if($this->startView->userWantsToLogin() && !$this->loginDAL->isUserLoggedIn()) {
             if ($this->startView->getUserCredentials() != null) {
                 try {
-                    $this->userDAL->authenticateUser($this->startView->getUserCredentials());
+                    $this->loginDAL->authenticateUser($this->startView->getUserCredentials());
                     $this->startView->showResponseMessage();
                 } catch (\common\EmptyUserNameException $e) {
                     $this->startView->setMessage("Username missing!");
@@ -51,18 +49,18 @@ class StartController
             $registerController = new \controller\RegisterController();
         }
 
-        if($this->startView->userWantsToLogout() && $this->userDAL->isUserLoggedIn()){
-            $this->userDAL->unsetUserLoggedInSession();
+        if($this->startView->userWantsToLogout() && $this->loginDAL->isUserLoggedIn()){
+            $this->loginDAL->unsetUserLoggedInSession();
             $this->startView->showResponseMessage();
 
         }
 
     }
     public function echoHTML(){
-        if(!$this->userDAL->isUserLoggedIn() && !$this->startView->UserWantsToRegister() || $this->registerView->UserWantsToGoBack()){
+        if(!$this->loginDAL->isUserLoggedIn() && !$this->startView->UserWantsToRegister() || $this->registerView->UserWantsToGoBack()){
             $this->layoutView->render($this->startView->renderLoginHTML(), $this->dateTimeView);
         }
-        if($this->userDAL->isUserLoggedIn()){
+        if($this->loginDAL->isUserLoggedIn()){
             $this->layoutView->render($this->startView->renderLogoutHTML(), $this->dateTimeView);
         }
         if($this->startView->UserWantsToRegister()){

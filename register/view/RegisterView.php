@@ -7,6 +7,8 @@
  */
 
 namespace view;
+require_once('model/User.php');
+require_once('model/RegisterDAL.php');
 
 class RegisterView
 {
@@ -17,6 +19,12 @@ class RegisterView
     private static $passwordrepeat = 'RegisterView::PasswordRepeat';
     private static $doRegistration = 'RegisterView::Register';
     private $responseMessage = "";
+    private $registerDAL;
+    private $userExists;
+
+    public function __construct(){
+        $this->registerDAL = new \model\RegisterDAL();
+    }
 
 
     public function renderRegistrationHTML(){
@@ -50,6 +58,8 @@ class RegisterView
     }
 
     public function inputResponse(){
+        $this->userExists = $this->registerDAL->userAlreadyExists();
+
         if($this->userSubmitsRegistrationForm()){
             if(mb_strlen($this->getUserName()) < 3){
                 $this->responseMessage = 'Username has too few characters, at least 3 characters.<br/>';
@@ -58,7 +68,10 @@ class RegisterView
                 $this->responseMessage .= 'Password has too few characters, at least 6 characters.';
             }
             if($this->getPassword() !== $this->getRepeatPassword()){
-                $this->responseMessage .= 'Passwords do not match.';
+                $this->responseMessage = 'Passwords do not match.';
+            }
+            if($this->userExists){
+                $this->responseMessage = 'User exists, pick another username.';
             }
         }
         $this->setMessage($this->responseMessage);
@@ -90,6 +103,10 @@ class RegisterView
 
     private function getRepeatPassword(){
         return trim($_POST[self::$passwordrepeat]);
+    }
+
+    public function getUserData(){
+        return new\model\User($this->getUserName(), $this->getPassword());
     }
 
 

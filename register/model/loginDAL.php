@@ -8,7 +8,7 @@
 
 namespace model;
 
-class UserDAL
+class loginDAL
 {
     private $users = array();
     private $userLoggedInSession = "loggedIn";

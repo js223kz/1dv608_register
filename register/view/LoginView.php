@@ -2,7 +2,7 @@
 
 namespace view;
 
-require_once('model/UserDAL.php');
+require_once('model/loginDAL.php');
 
 
 class LoginView
@@ -21,7 +21,7 @@ class LoginView
 	private $message = "";
 	private $userDAL;
 
-	public function __construct(\model\UserDAL $userDB){
+	public function __construct(\model\loginDAL $userDB){
 		$this->userDAL = $userDB;
 	}
 

@@ -6,7 +6,7 @@
  * Time: 12:06
  */
 namespace view;
-require_once('model/UserDAL.php');
+require_once('model/loginDAL.php');
 class StartView
 {
     private static $login = 'LoginView::Login';
@@ -23,7 +23,7 @@ class StartView
     private $pwd = "";
     private $userDAL;
     public function __construct(){
-        $this->userDAL = new \model\UserDAL();
+        $this->userDAL = new \model\loginDAL();
     }
     public function UserWantsToRegister(){
         if (isset($_GET['register'])){

@@ -8,25 +8,24 @@
 
 namespace controller;
 require_once('view/RegisterView.php');
-require_once('view/LayoutView.php');
-require_once('view/DateTimeView.php');
+require_once('model/RegisterDAL.php');
 
 class RegisterController
 {
     private $registerView;
-    private $layoutView;
-    private $dateTimeView;
+    private $registerDAL;
+
     public function __construct(){
-        //$this->registerView = new \view\RegisterView();
-        //$this->layoutView = new \view\LayoutView();
-        //$this->dateTimeView = new\view\DateTimeView();
-        ///$this->getUserRegistration();
+        $this->registerView = new \view\RegisterView();
+        $this->registerDAL = new\model\RegisterDAL();
+        $this->getUserRegistration();
     }
 
-   /* public function getUserRegistration()
+    public function getUserRegistration()
     {
+        if($this->registerView->userSubmitsRegistrationForm()){
 
-
-
-    }*/
+            $this->registerDAL->saveNewUser($this->registerView->getUserData());
+        }
+    }
 }

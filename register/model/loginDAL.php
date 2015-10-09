@@ -67,20 +67,20 @@ class loginDAL
         if(empty($password)){
             throw new \common\EmtpyPasswordException();
         }
+        if(file_exists("data/" . $username. ".txt")){
 
-
-
-        if (array_key_exists($username, $this->users)) {
-
-            if($this->users[$username] === $password){
+            $handle = fopen("data/" . $username. ".txt", "r");
+            $contents = fread($handle, filesize("data/" . $username. ".txt"));
+            fclose($handle);
+            if($contents === $password){
                 $this->setUserLoggedInSession();
                 return true;
             }else{
-               return false;
+                return false;
             }
+
         }else{
             return false;
         }
     }
-
 }

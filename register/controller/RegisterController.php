@@ -18,14 +18,16 @@ class RegisterController
     public function __construct(){
         $this->registerView = new \view\RegisterView();
         $this->registerDAL = new\model\RegisterDAL();
-        $this->getUserRegistration();
+        $this->checkUserInput();
+
     }
 
-    public function getUserRegistration()
+    public function checkUserInput()
     {
-        if($this->registerView->userSubmitsRegistrationForm()){
 
-            $this->registerDAL->saveNewUser($this->registerView->getUserData());
+        if($this->registerView->userSubmitsRegistrationForm() && $this->registerView->inputResponse() != null){
+            $this->registerDAL->saveNewUser($this->registerView->inputResponse());
+            $this->registerDAL->userAlreadyExists();
         }
     }
 }

@@ -47,6 +47,7 @@ class StartController
         }
         if($this->startView->UserWantsToRegister()){
             $registerController = new \controller\RegisterController();
+            $this->registerView->inputResponse();
         }
 
         if($this->startView->userWantsToLogout() && $this->loginDAL->isUserLoggedIn()){
@@ -64,7 +65,7 @@ class StartController
             $this->layoutView->render($this->startView->renderLogoutHTML(), $this->dateTimeView);
         }
         if($this->startView->UserWantsToRegister()){
-            $this->layoutView->render($this->registerView->inputResponse(), $this->dateTimeView);
+            $this->layoutView->render($this->registerView->renderRegistrationHTML(), $this->dateTimeView);
         }
 
     }

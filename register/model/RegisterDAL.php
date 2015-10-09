@@ -12,20 +12,19 @@ require_once('model/User.php');
 
 class RegisterDAL
 {
-    private $userExists;
-    private $newUserName;
     public function saveNewUser(\model\User $newUser){
-        $this->newUserName = $newUser->getUserName();
-        $file = fopen("data/" . $this->newUserName . ".txt", "w");
+        $newUser->getUserName();
+        $file = fopen("data/" . $newUser->getUserName() . ".txt", "w");
         fwrite($file, $newUser->getPassword());
         fclose($file);
     }
 
-    public function userAlreadyExists(){
-        if(file_exists("data/" . $this->newUserName . ".txt")){
-            $this->userExists = true;
+    public function userAlreadyExists($username){
+
+        if(file_exists("data/" . $username . ".txt")){
+            return true;
         }
-        return $this->userExists;
+        return false;
     }
 
 

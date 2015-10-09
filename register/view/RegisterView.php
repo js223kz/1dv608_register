@@ -24,6 +24,7 @@ class RegisterView
 
     public function __construct(){
         $this->registerDAL = new \model\RegisterDAL();
+
     }
 
 
@@ -58,24 +59,27 @@ class RegisterView
     }
 
     public function inputResponse(){
-        $this->userExists = $this->registerDAL->userAlreadyExists();
 
+        var_dump($this->userExists);
         if($this->userSubmitsRegistrationForm()){
             if(mb_strlen($this->getUserName()) < 3){
                 $this->responseMessage = 'Username has too few characters, at least 3 characters.<br/>';
             }
-            if(mb_strlen($this->getPassword()) < 6){
+            else if(mb_strlen($this->getPassword()) < 6){
                 $this->responseMessage .= 'Password has too few characters, at least 6 characters.';
             }
-            if($this->getPassword() !== $this->getRepeatPassword()){
+            else if($this->getPassword() !== $this->getRepeatPassword()){
                 $this->responseMessage = 'Passwords do not match.';
             }
-            if($this->userExists){
+            else if($this->registerDAL->userAlreadyExists($this->getUserName())){
                 $this->responseMessage = 'User exists, pick another username.';
             }
+            else{
+                return new\model\User($this->getUserName(), $this->getPassword());
+            }
+            $this->setMessage($this->responseMessage);
         }
-        $this->setMessage($this->responseMessage);
-        return $this->renderRegistrationHTML();
+        return null;
     }
 
     public function userSubmitsRegistrationForm(){
@@ -83,11 +87,11 @@ class RegisterView
     }
 
     private function setMessage($inputMessage){
-        $this->inputMessage = $inputMessage;
+        $this->responseMessage = $inputMessage;
     }
 
     private function getInputMessage(){
-        return $this->inputMessage;
+        return $this->responseMessage;
     }
 
     private function getUserName(){
@@ -105,9 +109,7 @@ class RegisterView
         return trim($_POST[self::$passwordrepeat]);
     }
 
-    public function getUserData(){
-        return new\model\User($this->getUserName(), $this->getPassword());
-    }
+
 
 
 }

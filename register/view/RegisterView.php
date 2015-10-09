@@ -20,14 +20,16 @@ class RegisterView
     private static $doRegistration = 'RegisterView::Register';
     private $responseMessage = "";
     private $registerDAL;
-    private $userExists;
+    private $userName = "";
 
     public function __construct(){
         $this->registerDAL = new \model\RegisterDAL();
 
     }
 
-
+    /**
+     * @return no output but a string
+     */
     public function renderRegistrationHTML(){
         return '
             <a href="?back">Back to login</a><h2>Not logged in</h2>
@@ -59,24 +61,28 @@ class RegisterView
     }
 
     public function inputResponse(){
-
-        var_dump($this->userExists);
         if($this->userSubmitsRegistrationForm()){
+            $this->setUserName($_POST[self::$username]);
             if(mb_strlen($this->getUserName()) < 3){
                 $this->responseMessage = 'Username has too few characters, at least 3 characters.<br/>';
             }
-            else if(mb_strlen($this->getPassword()) < 6){
+            if(mb_strlen($this->getPassword()) < 6){
                 $this->responseMessage .= 'Password has too few characters, at least 6 characters.';
             }
-            else if($this->getPassword() !== $this->getRepeatPassword()){
+            if(!$this->passwordsMatches()){
                 $this->responseMessage = 'Passwords do not match.';
             }
-            else if($this->registerDAL->userAlreadyExists($this->getUserName())){
+            if($this->registerDAL->userAlreadyExists($this->getUserName())){
                 $this->responseMessage = 'User exists, pick another username.';
             }
-            else{
+            if(strlen($this->getUserName()) != strlen(strip_tags($this->getUserName()))) {
+                $this->responseMessage = 'Username contains invalid characters';
+                $this->setUserName("abc");
+            }
+            if(mb_strlen($this->getUserName()) >= 3 && $this->getPassword() >= 6 && $this->passwordsMatches()){
                 return new\model\User($this->getUserName(), $this->getPassword());
             }
+
             $this->setMessage($this->responseMessage);
         }
         return null;
@@ -93,12 +99,12 @@ class RegisterView
     private function getInputMessage(){
         return $this->responseMessage;
     }
+    private function setUserName($userName){
+        $this->userName = $userName;
+    }
 
     private function getUserName(){
-        if(isset($_POST[self::$username])){
-            return trim($_POST[self::$username]);
-        }
-        return "";
+        return $this->userName;
     }
 
     private function getPassword(){
@@ -109,7 +115,10 @@ class RegisterView
         return trim($_POST[self::$passwordrepeat]);
     }
 
-
-
-
+    private function passwordsMatches(){
+        if($this->getPassword() === $this->getRepeatPassword()){
+            return true;
+        }
+        return false;
+    }
 }

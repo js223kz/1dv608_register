@@ -17,12 +17,8 @@ class RegisterView
     private static $passwordrepeat = 'RegisterView::PasswordRepeat';
     private static $doRegistration = 'RegisterView::Register';
     private $responseMessage = "";
-    private $userName;
-    private $pwd;
-    private $pwdRepeat;
 
-    public function __construct(){
-    }
+
     public function renderRegistrationHTML(){
         return '
             <a href="?back">Back to login</a><h2>Not logged in</h2>
@@ -54,12 +50,16 @@ class RegisterView
     }
 
     public function inputResponse(){
-
-        if($this->userSubmitsRegistrationForm() && mb_strlen($this->getUserName()) < 3){
-            $this->responseMessage = 'Username has too few characters, at least 3 characters.<br/>';
-        }
-        if($this->userSubmitsRegistrationForm() && mb_strlen($this->getPassword()) < 6){
-            $this->responseMessage .= 'Password has too few characters, at least 6 characters.';
+        if($this->userSubmitsRegistrationForm()){
+            if(mb_strlen($this->getUserName()) < 3){
+                $this->responseMessage = 'Username has too few characters, at least 3 characters.<br/>';
+            }
+            if(mb_strlen($this->getPassword()) < 6){
+                $this->responseMessage .= 'Password has too few characters, at least 6 characters.';
+            }
+            if($this->getPassword() !== $this->getRepeatPassword()){
+                $this->responseMessage .= 'Passwords do not match.';
+            }
         }
         $this->setMessage($this->responseMessage);
         return $this->renderRegistrationHTML();

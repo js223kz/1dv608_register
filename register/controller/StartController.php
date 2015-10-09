@@ -10,6 +10,8 @@ namespace controller;
 require_once('view/StartView.php');
 require_once('view/LayoutView.php');
 require_once('view/DateTimeView.php');
+require_once('view/RegisterView.php');
+require_once('controller/RegisterController.php');
 
 use view\LayoutView;
 use view\StartView;
@@ -19,6 +21,7 @@ class StartController
     private $startView;
     private $layoutView;
     private $dateTimeView;
+    private $registerView;
     private $userDAL;
     private $userLoggeIn = false;
 
@@ -27,6 +30,7 @@ class StartController
         $this->startView = new \view\StartView();
         $this->layoutView = new \view\LayoutView();
         $this->dateTimeView = new \view\DateTimeView();
+        $this->registerView = new \view\RegisterView();
         $this->executeUserChoice();
     }
 
@@ -45,7 +49,8 @@ class StartController
             }
         }
         if($this->startView->UserWantsToRegister()){
-
+            $registerController = new \controller\RegisterController($this->registerView);
+            $registerController->getUserRegistration();
         }
 
         if($this->startView->userWantsToLogout() && $this->userDAL->isUserLoggedIn()){
@@ -57,10 +62,14 @@ class StartController
     }
 
     public function echoHTML(){
-        if(!$this->userDAL->isUserLoggedIn()){
+        if(!$this->userDAL->isUserLoggedIn() && !$this->startView->UserWantsToRegister()){
             $this->layoutView->render($this->startView->renderLoginHTML(), $this->dateTimeView);
-        }else{
+        }
+        if($this->userDAL->isUserLoggedIn()){
             $this->layoutView->render($this->startView->renderLogoutHTML(), $this->dateTimeView);
+        }
+        if(!$this->userDAL->isUserLoggedIn() && $this->startView->UserWantsToRegister()){
+            $this->layoutView->render($this->registerView->renderRegistrationHTML(), $this->dateTimeView);
         }
     }
 }

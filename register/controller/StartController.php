@@ -23,7 +23,6 @@ class StartController
     private $dateTimeView;
     private $registerView;
     private $userDAL;
-    private $userLoggeIn = false;
 
     public function __construct(\model\UserDAL $userDAL){
         $this->userDAL = $userDAL;
@@ -49,8 +48,7 @@ class StartController
             }
         }
         if($this->startView->UserWantsToRegister()){
-            $registerController = new \controller\RegisterController($this->registerView);
-            $registerController->getUserRegistration();
+            $registerController = new \controller\RegisterController();
         }
 
         if($this->startView->userWantsToLogout() && $this->userDAL->isUserLoggedIn()){
@@ -60,16 +58,16 @@ class StartController
         }
 
     }
-
     public function echoHTML(){
-        if(!$this->userDAL->isUserLoggedIn() && !$this->startView->UserWantsToRegister()){
+        if(!$this->userDAL->isUserLoggedIn() && !$this->startView->UserWantsToRegister() || $this->registerView->UserWantsToGoBack()){
             $this->layoutView->render($this->startView->renderLoginHTML(), $this->dateTimeView);
         }
         if($this->userDAL->isUserLoggedIn()){
             $this->layoutView->render($this->startView->renderLogoutHTML(), $this->dateTimeView);
         }
-        if(!$this->userDAL->isUserLoggedIn() && $this->startView->UserWantsToRegister()){
-            $this->layoutView->render($this->registerView->renderRegistrationHTML(), $this->dateTimeView);
+        if($this->startView->UserWantsToRegister()){
+            $this->layoutView->render($this->registerView->inputResponse(), $this->dateTimeView);
         }
+
     }
 }

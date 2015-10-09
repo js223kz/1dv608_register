@@ -65,9 +65,9 @@ class StartView
     public function userWantsToLogin(){
         return isset($_POST[self::$login]);
     }
-    /*************************************
+    /**
      * @return bool
-     *************************************/
+     */
     public function userWantsToLogout(){
         return isset($_POST[self::$logout]);
     }
@@ -77,10 +77,10 @@ class StartView
         }
         return false;
     }
-    /*************************************
+    /**
      * @param String $message
      * @return String
-     *************************************/
+     */
     public function setMessage($message){
         $this->message = $message;
     }
@@ -122,6 +122,7 @@ class StartView
     public function getUserCredentials(){
         $this->setUserName(trim($_POST[self::$name])) ;
         $this->setPassword(trim($_POST[self::$password]));
+
         if ($this->userWantsToLogin() && $this->getUserName() == '') {
             $this->setMessage('Username is missing');
         }else if($this->userWantsToLogin() && $this->getPassword() == ''){

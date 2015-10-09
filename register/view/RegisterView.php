@@ -15,7 +15,7 @@ class RegisterView
     private static $username = 'RegisterView::UserName';
     private static $password = 'RegisterView::Password';
     private static $passwordrepeat = 'RegisterView::PasswordRepeat';
-    private static $doRegistration = 'RegisterView::DoRegistration';
+    private static $doRegistration = 'RegisterView::Register';
     private $responseMessage = "";
     private $userName;
     private $pwd;
@@ -55,12 +55,11 @@ class RegisterView
 
     public function inputResponse(){
 
-
         if($this->userSubmitsRegistrationForm() && mb_strlen($this->getUserName()) < 3){
-            $this->responseMessage = "Username has too few characters, at least 3 characters.<br/>";
+            $this->responseMessage = 'Username has too few characters, at least 3 characters.<br/>';
         }
         if($this->userSubmitsRegistrationForm() && mb_strlen($this->getPassword()) < 6){
-            $this->responseMessage .= "Password has too few characters, at least 6 characters.";
+            $this->responseMessage .= 'Password has too few characters, at least 6 characters.';
         }
         $this->setMessage($this->responseMessage);
         return $this->renderRegistrationHTML();
